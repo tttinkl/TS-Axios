@@ -4,7 +4,7 @@ import xhr from '../core/xhr'
 import { transformRequest, transformResponse } from '../helpers/data'
 import { processHeaders } from '../helpers/headers'
 
-function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
+function dispatchRequest<T>(config: AxiosRequestConfig): AxiosPromise<T> {
   processConfig(config)
   return xhr(config).then(res => {
     return transformRespsonseData(res)

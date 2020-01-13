@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosPromise, Method, Axios as AxiosInterface } fro
 import dispatchRequest from './dispatchRequest'
 
 export default class Axios implements AxiosInterface {
-  request(url: any, config?: any): AxiosPromise {
+  request<T>(url: any, config?: any): AxiosPromise<T> {
     if (typeof url === 'string') {
       if (!config) {
         config = {}
@@ -14,33 +14,33 @@ export default class Axios implements AxiosInterface {
     return dispatchRequest(config)
   }
 
-  get(url: string, config?: AxiosRequestConfig): AxiosPromise {
+  get<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithoutData('get', url, config)
   }
 
-  delete(url: string, config?: AxiosRequestConfig): AxiosPromise {
+  delete<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithoutData('delete', url, config)
   }
-  head(url: string, config?: AxiosRequestConfig): AxiosPromise {
+  head<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithoutData('head', url, config)
   }
 
-  options(url: string, config?: AxiosRequestConfig): AxiosPromise {
+  options<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithoutData('options', url, config)
   }
 
-  post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+  post<T>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithData('post', url, data, config)
   }
 
-  put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+  put<T>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithData('put', url, data, config)
   }
 
-  patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+  patch<T>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this._requestMethodWithData('patch', url, data, config)
   }
-  _requestMethodWithoutData(method: Method, url: string, config: AxiosRequestConfig) {
+  _requestMethodWithoutData<T>(method: Method, url: string, config: AxiosRequestConfig): AxiosPromise<T> {
     return this.request(
       Object.assign(config || {}, {
         method,
@@ -48,7 +48,7 @@ export default class Axios implements AxiosInterface {
       })
     )
   }
-  _requestMethodWithData(method: Method, url: string, data?: any, config?: AxiosRequestConfig) {
+  _requestMethodWithData<T>(method: Method, url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T> {
     return this.request(
       Object.assign(config || {}, {
         method,
