@@ -32,6 +32,7 @@ export default class Axios implements AxiosInterface {
   }
 
   request<T>(url: any, config?: any): AxiosPromise<T> {
+    console.log()
     if (typeof url === 'string') {
       if (!config) {
         config = {}
