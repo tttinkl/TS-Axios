@@ -3,9 +3,12 @@ import { parseHeaders } from '../helpers/headers'
 import { createError } from '../helpers/error'
 export default function xhr<T>(config: AxiosRequestConfig): AxiosPromise<T> {
   return new Promise((resolve, reject) => {
-    const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken } = config
+    const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken, withCredentials } = config
     const request = new XMLHttpRequest()
 
+    if (withCredentials) {
+      request.withCredentials = true
+    }
     if (timeout) {
       request.timeout = timeout
     }
